@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -6,47 +6,51 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
-} from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { ScrollView } from "react-native-web";
-import Resep from "./_components/Resep";
+  FlatList,
+} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { ScrollView } from 'react-native-web';
+import Resep from './_components/Resep';
+import bg from '../../img/bg.jpg';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
-  const [name, setName] = useState("admin");
+  const [name, setName] = useState('admin');
 
   const popularRecipes = [
     {
       id: 1,
-      name: "Spaghetti Carbonara",
-      image: require("../../img/bg.jpg"),
-      time: "2 hours ago",
+      name: 'Spaghetti Carbonara',
+      image: bg,
+      time: '2 hours ago',
       retweets: 12,
       likes: 53,
     },
     {
       id: 2,
-      name: "Cheeseburger",
-      image: require("../../img/bg.jpg"),
-      time: "3 hours ago",
+      name: 'Cheeseburger',
+      image: bg,
+      time: '3 hours ago',
       retweets: 24,
       likes: 79,
     },
   ];
 
+  console.log(popularRecipes);
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <View style={styles.btn_container}>
-          <TextInput style={styles.searchInput} placeholder="Search" />
-          <TextInput style={styles.searchInput} placeholder="Search" />
+          <TextInput style={styles.searchInput} placeholder='Search' />
+          <TextInput style={styles.searchInput} placeholder='Search' />
         </View>
         <View style={styles.profile}>
           <Image
-            source={require("../../img/foto.png")}
+            source={require('../../img/foto.png')}
             style={styles.profileImage}
           />
-          <Text style={styles.profileName}>{"Irsan"}</Text>
+          <Text style={styles.profileName}>{'Irsan'}</Text>
         </View>
       </View>
       <View style={styles.content}>
@@ -58,9 +62,14 @@ const HomeScreen = () => {
         <View style={styles.rightContent}>
           <Text style={styles.contentTitle}>Popular Recipes</Text>
           <ScrollView>
-            {/* {popularRecipes.map((recipe) => (
-              <Resep obj={recipe} />
-            ))} */}
+            {/* <FlatList
+              data={popularRecipes}
+              renderItem={({ item }) => <Resep obj={item} />}
+              keyExtractor={(item) => item.id}
+            /> */}
+            {popularRecipes.map((recipe) => (
+              <Resep obj={recipe} key={recipe.id} />
+            ))}
           </ScrollView>
           {/* {popularRecipes.map((recipe) => (
             <View key={recipe.id} style={styles.recipe}>
@@ -95,9 +104,9 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   header: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     marginBottom: 50,
   },
   btn_container: {
@@ -108,41 +117,41 @@ const styles = StyleSheet.create({
     width: 70,
     height: 70,
     borderRadius: 70,
-    overflow: "hidden",
+    overflow: 'hidden',
     marginLeft: 50,
     marginTop: 20,
   },
   profileImage: {
-    width: "100%",
-    height: "100%",
+    width: '100%',
+    height: '100%',
   },
   profileName: {
-    color: "#000",
+    color: '#000',
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginTop: 10,
   },
   searchInput: {
     flex: 2,
     margin: 6,
     marginLeft: 0.5,
-    backgroundColor: "#A51B0B",
+    backgroundColor: '#A51B0B',
     borderRadius: 20,
     paddingVertical: 10,
     paddingHorizontal: 25,
   },
   content: {
     flex: 1,
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   contentTitle: {
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginBottom: 10,
   },
   iconText: {
     marginLeft: 5,
-    color: "gray",
+    color: 'gray',
     fontSize: 14,
   },
 });
