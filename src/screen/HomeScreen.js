@@ -9,7 +9,7 @@ import {
   FlatList,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { ScrollView } from 'react-native-web';
+import { ScrollView } from 'react-native';
 import Resep from '../components/Resep';
 import bg from '../../img/bg.jpg';
 
