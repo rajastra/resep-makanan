@@ -72,12 +72,12 @@ const HomeScreen = () => {
     <View style={styles.container}>
       <View style={styles.header}>
         <View style={styles.btn_container}>
-          <TextInput
+          <TextInput placeholderTextColor="#fff"
             style={styles.searchInput}
-            placeholder='Mau cari resep apa'
+            placeholder ='Mau cari resep apa?'
           />
           <TouchableOpacity style={styles.searchInput}>
-            <Text style={{ color: '#fff' }}>Mau nenambah makanan</Text>
+            <Text style={{ color: '#fff', fontWeight: 'bold', }}>Mau nenambah makanan</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.profile}>
@@ -141,14 +141,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   searchInput: {
-    flex: 2,
     margin: 6,
     marginLeft: 0.5,
     backgroundColor: '#A51B0B',
     borderRadius: 20,
     paddingVertical: 10,
     paddingHorizontal: 25,
-    color: '#fff',
+    fontWeight: 'bold',
+
   },
   content: {
     flex: 1,
