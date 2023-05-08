@@ -12,7 +12,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName={'HomeScreen'}
+        initialRouteName={'DetailScreen'}
         screenOptions={{
           headerShown: false,
         }}
@@ -20,7 +20,7 @@ export default function App() {
         <Stack.Screen name='LoginScreen' component={LoginScreen} />
         <Stack.Screen name='RegisterScreen' component={RegisterScreen} />
         <Stack.Screen name='HomeScreen' component={HomeScreen} />
-        <Stack.Screen name='detail' component={DetailScreen} />
+        <Stack.Screen name='DetailScreen' component={DetailScreen} />
         <Stack.Screen name='addMakanan' component={AddMakanan} />
       </Stack.Navigator>
     </NavigationContainer>
