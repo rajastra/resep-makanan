@@ -1,60 +1,104 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, ImageBackground, Image } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  ImageBackground,
+  Image,
+} from 'react-native';
+import { useAuth } from '../context/auth-context';
+import useHttp from '../hooks/use-http';
+import * as Yup from 'yup';
+import { useFormik } from 'formik';
+import { ActivityIndicator } from 'react-native-web';
+
+const LoginSchema = Yup.object().shape({
+  email: Yup.string().email('Invalid email').required('Required'),
+  password: Yup.string().required('Required'),
+});
 
 const LoginScreen = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const navigation = useNavigation(); // menghapus parameter kosong di dalam useNavigation
+  const { isLoading, error, sendRequest } = useHttp();
+  const { updateToken } = useAuth();
+  const navigation = useNavigation();
+  /*
+   email: 'rajatesting@gmail.com',
+   password: '1234raja',
+    */
 
-  const handleLogin = () => {
-    console.log(`username: ${username}, password: ${password}`);
-    // kode untuk validasi login bisa ditambahkan di sini
-  
-    // contoh kode untuk menampilkan pesan selamat datang jika login berhasil
-    if (username === 'q' && password === '1') {
-      alert(`Welcome ${username}!`); // menampilkan pesan selamat datang
-      navigation.navigate('HomeScreen'); // mengarahkan ke halaman HomeScreen
-    }
-  }
-  
+  const formik = useFormik({
+    initialValues: { email: '', password: '' },
+    validationSchema: LoginSchema,
+    onSubmit: (values) => {
+      sendRequest(
+        {
+          method: 'POST',
+          url: '/api/v1/users/login',
+          body: values,
+        },
+        (responseData) => {
+          updateToken(responseData.token);
+          navigation.navigate('HomeScreen');
+        }
+      );
+    },
+  });
 
   return (
-    <ImageBackground source={require('../../img/bg.jpg')} style={styles.backgroundImage}>
+    <ImageBackground
+      source={require('../../img/bg.jpg')}
+      style={styles.backgroundImage}
+    >
       <View style={styles.container}>
-        <Image source={require('../../img/logo-cook.png')} style={styles.logo} />
-        <TextInput
-          style={styles.input}
-          placeholder="Username"
-          value={username}
-          onChangeText={text => setUsername(text)}
+        <Image
+          source={require('../../img/logo-cook.png')}
+          style={styles.logo}
         />
         <TextInput
           style={styles.input}
-          placeholder="Password"
-          secureTextEntry={true}
-          value={password}
-          onChangeText={text => setPassword(text)}
+          placeholder='Email'
+          onChangeText={formik.handleChange('email')}
+          onBlur={formik.handleBlur('email')}
+          value={formik.values.email}
+          keyboardType='email-address'
         />
-        <TouchableOpacity
-          style={styles.button}
-          onPress={handleLogin}
-        >
-          <Text style={styles.buttonText}>Login</Text>
-        </TouchableOpacity>
+        {formik.touched.email && formik.errors.email && (
+          <Text style={styles.error}>{formik.errors.email}</Text>
+        )}
+        <TextInput
+          style={styles.input}
+          placeholder='Password'
+          onChangeText={formik.handleChange('password')}
+          onBlur={formik.handleBlur('password')}
+          value={formik.values.password}
+          secureTextEntry
+        />
+        {formik.touched.password && formik.errors.password && (
+          <Text style={styles.error}>{formik.errors.password}</Text>
+        )}
+        {isLoading && <ActivityIndicator size='large' color='#0000ff' />}
+        {!isLoading && (
+          <TouchableOpacity style={styles.button} onPress={formik.handleSubmit}>
+            <Text style={styles.buttonText}>Login</Text>
+          </TouchableOpacity>
+        )}
         <View style={styles.signupContainer}>
           <Text style={styles.signupText}>Do you have an account?</Text>
-          <TouchableOpacity onPress={() => {
-            navigation.navigate('RegisterScreen'); // navigasi ke halaman RegisterScreen
-          }} >
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('RegisterScreen'); // navigasi ke halaman RegisterScreen
+            }}
+          >
             <Text style={styles.signupButton}>Sign up</Text>
           </TouchableOpacity>
         </View>
-
       </View>
     </ImageBackground>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -62,14 +106,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
-    backgroundColor: 'rgba(0,0,0,0.5)'
+    backgroundColor: 'rgba(0,0,0,0.5)',
   },
   input: {
     width: '100%',
     backgroundColor: '#fff',
     borderRadius: 25,
     padding: 15,
-    marginBottom: 10
+    marginBottom: 10,
   },
   button: {
     width: '50%',
@@ -78,12 +122,12 @@ const styles = StyleSheet.create({
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 20
+    marginTop: 20,
   },
   buttonText: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#fff'
+    color: '#fff',
   },
   logo: {
     width: 230,
@@ -93,24 +137,31 @@ const styles = StyleSheet.create({
   },
   signupContainer: {
     flexDirection: 'row',
-    marginTop: 20
+    marginTop: 20,
   },
   signupText: {
     color: '#fff',
-    fontSize: 16
+    fontSize: 16,
   },
   signupButton: {
     color: '#fff',
     fontSize: 16,
     fontWeight: 'bold',
-    marginLeft: 5
+    marginLeft: 5,
   },
   backgroundImage: {
     flex: 1,
     resizeMode: 'cover',
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+  },
+  error: {
+    color: 'red',
+    fontSize: 14,
+    alignSelf: 'flex-start',
+    marginTop: -10,
+    marginLeft: 10,
+    marginBottom: 10,
+  },
 });
-
 
 export default LoginScreen;

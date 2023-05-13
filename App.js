@@ -6,24 +6,26 @@ import DetailScreen from './src/screen/DetailScreen';
 import AddMakanan from './src/screen/AddMakanan';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { AuthProvider } from './src/context/auth-context';
 
 const Stack = createNativeStackNavigator();
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName={'DetailScreen'}
-        screenOptions={{
-          headerShown: false,
-        }}
-      >
-        <Stack.Screen name='LoginScreen' component={LoginScreen} />
-        <Stack.Screen name='RegisterScreen' component={RegisterScreen} />
-        <Stack.Screen name='HomeScreen' component={HomeScreen} />
-        <Stack.Screen name='DetailScreen' component={DetailScreen} />
-        <Stack.Screen name='addMakanan' component={AddMakanan} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <AuthProvider>
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
+          <Stack.Screen name='LoginScreen' component={LoginScreen} />
+          <Stack.Screen name='RegisterScreen' component={RegisterScreen} />
+          <Stack.Screen name='HomeScreen' component={HomeScreen} />
+          <Stack.Screen name='DetailScreen' component={DetailScreen} />
+          <Stack.Screen name='addMakanan' component={AddMakanan} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </AuthProvider>
   );
 }
 
