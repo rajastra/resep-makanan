@@ -13,11 +13,12 @@ import { useAuth } from '../context/auth-context';
 import useHttp from '../hooks/use-http';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
-import { ActivityIndicator } from 'react-native-web';
+import { ActivityIndicator } from 'react-native';
+import Toast from 'react-native-toast-message';
 
 const LoginSchema = Yup.object().shape({
-  email: Yup.string().email('Invalid email').required('Required'),
-  password: Yup.string().required('Required'),
+  email: Yup.string().email('Invalid email').required('Please enter email'),
+  password: Yup.string().required('Please enter password'),
 });
 
 const LoginScreen = () => {
@@ -41,7 +42,17 @@ const LoginScreen = () => {
         },
         (responseData) => {
           updateToken(responseData.token);
-          navigation.navigate('HomeScreen');
+          Toast.show({
+            type: 'success',
+            text1: 'Success',
+            text2: 'You have successfully logged in!',
+            visibilityTime: 5000,
+            autoHide: true,
+          });
+          // if have token, navigate to HomeScreen
+          if (responseData.token) {
+            navigation.navigate('HomeScreen');
+          }
         }
       );
     },
@@ -79,7 +90,7 @@ const LoginScreen = () => {
         {formik.touched.password && formik.errors.password && (
           <Text style={styles.error}>{formik.errors.password}</Text>
         )}
-        {isLoading && <ActivityIndicator size='large' color='#0000ff' />}
+        {isLoading && <ActivityIndicator size='large' color='#DF0606' />}
         {!isLoading && (
           <TouchableOpacity style={styles.button} onPress={formik.handleSubmit}>
             <Text style={styles.buttonText}>Login</Text>

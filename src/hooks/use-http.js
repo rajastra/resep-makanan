@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useCallback } from 'react';
 import { DEFAULT_URL } from '../constant/url';
+import { Toast } from 'react-native-toast-message/lib/src/Toast';
 
 const useHttp = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -38,8 +39,16 @@ const useHttp = () => {
           error = `${field} doesn't ${message}`;
         }
         setError(error);
+        Toast.show({
+          type: 'error',
+          text1: 'Error',
+          text2: error,
+          visibilityTime: 2000,
+          autoHide: true,
+        });
+      } finally {
+        setIsLoading(false);
       }
-      setIsLoading(false);
     },
     [BASE_URL]
   );

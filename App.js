@@ -7,6 +7,7 @@ import AddMakanan from './src/screen/AddMakanan';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AuthProvider } from './src/context/auth-context';
+import Toast from 'react-native-toast-message';
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -25,6 +26,7 @@ export default function App() {
           <Stack.Screen name='addMakanan' component={AddMakanan} />
         </Stack.Navigator>
       </NavigationContainer>
+      <Toast />
     </AuthProvider>
   );
 }
