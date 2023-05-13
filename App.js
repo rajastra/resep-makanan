@@ -4,6 +4,9 @@ import RegisterScreen from './src/screen/RegisterScreen';
 import HomeScreen from './src/screen/HomeScreen';
 import DetailScreen from './src/screen/DetailScreen';
 import AddMakanan from './src/screen/AddMakanan';
+import AccUser from './src/screen/AccUser';
+import UpdatePass from './src/screen/UpdatePass';
+import UpdateUser from './src/screen/UpdateUser';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AuthProvider } from './src/context/auth-context';
@@ -14,7 +17,8 @@ export default function App() {
   return (
     <AuthProvider>
       <NavigationContainer>
-        <Stack.Navigator
+        <Stack.Navigator 
+        initialRouteName={'AccUser'}
           screenOptions={{
             headerShown: false,
           }}
@@ -23,7 +27,10 @@ export default function App() {
           <Stack.Screen name='RegisterScreen' component={RegisterScreen} />
           <Stack.Screen name='HomeScreen' component={HomeScreen} />
           <Stack.Screen name='DetailScreen' component={DetailScreen} />
-          <Stack.Screen name='addMakanan' component={AddMakanan} />
+          <Stack.Screen name='AddMakanan' component={AddMakanan} />
+          <Stack.Screen name='AccUser' component={AccUser} />
+          <Stack.Screen name='UpdatePass' component={UpdatePass} />
+          <Stack.Screen name='UpdateUser' component={UpdateUser} />
         </Stack.Navigator>
       </NavigationContainer>
       <Toast />
