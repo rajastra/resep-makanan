@@ -13,11 +13,13 @@ import { ScrollView } from 'react-native';
 import Resep from '../components/Resep';
 import bg from '../../img/bg.jpg';
 import useHttp from '../hooks/use-http';
+import { useAuth } from '../context/auth-context';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
   const [recipes, setRecipes] = useState([]);
   const [search, setSearch] = useState('');
+  const { user } = useAuth();
   const { isLoading, error, sendRequest } = useHttp();
 
   const filteredRecipes = useMemo(() => {
@@ -67,15 +69,20 @@ const HomeScreen = () => {
             </Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.profile}>
+        <TouchableOpacity
+          style={styles.profile}
+          onPress={() => navigation.navigate('AccUser')}
+        >
           <View>
-            <Image
-              source={require('../../img/foto.png')}
-              style={styles.profileImage}
-            />
+            <View>
+              <Image
+                source={require('../../img/foto.png')}
+                style={styles.profileImage}
+              />
+            </View>
+            <Text style={styles.profileName}>{user.name || 'User'}</Text>
           </View>
-          <Text style={styles.profileName}>Madazyan</Text>
-        </View>
+        </TouchableOpacity>
       </View>
 
       <View style={styles.rightContentCategory}>

@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image,
   StyleSheet,
+  ActivityIndicator,
 } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import { useFormik } from 'formik';
@@ -13,10 +14,12 @@ import * as Yup from 'yup';
 import useHttp from '../hooks/use-http';
 import Toast from 'react-native-toast-message';
 import BackButton from '../components/BackButton';
+import { useNavigation } from '@react-navigation/native';
 
 const AddMakanan = () => {
   const [recipeImage, setRecipeImage] = useState(null);
   const { isLoading, error, sendRequest } = useHttp();
+  const navigation = useNavigation();
 
   const handleImagePicker = () => {
     // ImagePicker.showImagePicker({ title: 'Select Image' }, (response) => {
@@ -58,6 +61,8 @@ const AddMakanan = () => {
             visibilityTime: 5000,
             autoHide: true,
           });
+          formik.resetForm();
+          navigation.navigate('HomeScreen');
         }
       );
     },
@@ -130,12 +135,15 @@ const AddMakanan = () => {
         {formik.touched.steps && formik.errors.steps && (
           <Text style={styles.error}>{formik.errors.steps}</Text>
         )}
-        <TouchableOpacity
-          style={styles.addButton}
-          onPress={formik.handleSubmit}
-        >
-          <Text style={styles.addButtonText}>Add Recipe</Text>
-        </TouchableOpacity>
+        {isLoading && <ActivityIndicator size='large' color='#DF0606' />}
+        {!isLoading && (
+          <TouchableOpacity
+            style={styles.addButton}
+            onPress={formik.handleSubmit}
+          >
+            <Text style={styles.addButtonText}>Add Recipe</Text>
+          </TouchableOpacity>
+        )}
       </View>
     </>
   );
