@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F2CFCF',
-    padding: 20,
+    padding: 70,
   },
   header: {
     alignItems: 'center',
@@ -36,8 +36,9 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     borderRadius: 50,
-    marginBottom: 10,
+    marginBottom: 0,
   },
+  
   premiumText: {
     fontSize: 18,
     fontWeight: 'bold',

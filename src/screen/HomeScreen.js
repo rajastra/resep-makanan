@@ -77,7 +77,7 @@ const HomeScreen = () => {
             placeholder ='Mau cari resep apa?'
           />
           <TouchableOpacity style={styles.searchInput}>
-            <Text style={{ color: '#fff', fontWeight: 'bold', }}>Mau nenambah makanan</Text>
+            <Text style={{ color: '#fff', fontWeight: 'bold', }}>+ Tambah Makanan</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.profile}>
@@ -90,6 +90,22 @@ const HomeScreen = () => {
           <Text style={styles.profileName}>Irsan</Text>
         </View>
       </View>
+
+      <View style={styles.rightContentCategory}>
+          <Text style={styles.contentTitle}>Category</Text>
+          </View>
+        <View style={styles.categories}>
+      <TouchableOpacity style={styles.category}>
+        <Text style={styles.categoryText}>Tradisional</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.category}>
+        <Text style={styles.categoryText}>Hari Raya</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.category}>
+        <Text style={styles.categoryText}>Camilan</Text>
+      </TouchableOpacity>
+    </View>
+
       <View style={styles.content}>
         <View style={styles.rightContent}>
           <Text style={styles.contentTitle}>Popular Recipes</Text>
@@ -112,7 +128,7 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    padding: 15,
   },
   header: {
     flexDirection: 'row',
@@ -129,8 +145,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   profileImage: {
-    width: 70,
-    height: 70,
+    width: 100,
+    height: 100,
     borderRadius: 70,
   },
   profileName: {
@@ -162,6 +178,22 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     color: 'gray',
     fontSize: 14,
+  },
+  categories: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginVertical: 20,
+  },
+  category: {
+    backgroundColor: '#ed3101',
+    borderRadius: 60,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+  },
+  categoryText: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    color:'white',
   },
 });
 
