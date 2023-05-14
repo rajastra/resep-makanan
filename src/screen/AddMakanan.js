@@ -1,71 +1,134 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Image,
+  StyleSheet,
+} from 'react-native';
 import ImagePicker from 'react-native-image-picker';
-
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import useHttp from '../hooks/use-http';
+import Toast from 'react-native-toast-message';
 
 const AddMakanan = () => {
   const [recipeImage, setRecipeImage] = useState(null);
-  const [recipeName, setRecipeName] = useState('');
-  const [recipeCategory, setRecipeCategory] = useState('');
-  const [recipeTags, setRecipeTags] = useState('');
-  const [recipeIngredients, setRecipeIngredients] = useState('');
-  const [recipeDirections, setRecipeDirections] = useState('');
+  const { isLoading, error, sendRequest } = useHttp();
 
   const handleImagePicker = () => {
-    ImagePicker.showImagePicker({title: 'Select Image'}, response => {
-      if (response.uri) {
-        setRecipeImage(response.uri);
-      }
-    });
+    // ImagePicker.showImagePicker({ title: 'Select Image' }, (response) => {
+    //   if (response.uri) {
+    //     setRecipeImage(response.uri);
+    //   }
+    // });
   };
 
-  const handleAddRecipe = () => {
-    // Add recipe to database or perform other actions here
-  };
+  const AddRecipeSchema = Yup.object().shape({
+    title: Yup.string().required('Required'),
+    category: Yup.string().required('Required'),
+    tags: Yup.string().required('Required'),
+    ingredients: Yup.string().required('Required'),
+    steps: Yup.string().required('Required'),
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      title: '',
+      category: '',
+      tags: '',
+      ingredients: '',
+      steps: '',
+    },
+    validationSchema: AddRecipeSchema,
+    onSubmit: (values) => {
+      sendRequest(
+        {
+          method: 'POST',
+          url: '/api/v1/recipes',
+          body: values,
+        },
+        (responseData) => {
+          Toast.show({
+            type: 'success',
+            text1: 'Success',
+            text2: `Recipe ${responseData.data.recipe.title} added successfully!`,
+            visibilityTime: 5000,
+            autoHide: true,
+          });
+        }
+      );
+    },
+  });
 
   return (
     <View style={styles.container}>
       {recipeImage && (
-        <Image source={{uri: recipeImage}} style={styles.recipeImage} />
+        <Image source={{ uri: recipeImage }} style={styles.recipeImage} />
       )}
-      <TouchableOpacity style={styles.imagePickerButton} onPress={handleImagePicker}>
-    <Image source={require('../../img/Uploads.jpg')} style={styles.uploadIcon} />
-    <Text style={styles.imagePickerButtonText}>Upload Foto</Text>
-  </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.imagePickerButton}
+        onPress={handleImagePicker}
+      >
+        <Image
+          source={require('../../img/Uploads.jpg')}
+          style={styles.uploadIcon}
+        />
+        <Text style={styles.imagePickerButtonText}>Upload Foto</Text>
+      </TouchableOpacity>
       <TextInput
-        placeholder="Nama Resep Makanan"
         style={styles.textInput}
-        value={recipeName}
-        onChangeText={text => setRecipeName(text)}
+        placeholder='Recipe Name'
+        onChangeText={formik.handleChange('title')}
+        onBlur={formik.handleBlur('title')}
+        value={formik.values.title}
       />
+      {formik.touched.title && formik.errors.title && (
+        <Text style={styles.error}>{formik.errors.title}</Text>
+      )}
       <TextInput
-        placeholder="Masukan kategori"
         style={styles.textInput}
-        value={recipeCategory}
-        onChangeText={text => setRecipeCategory(text)}
+        placeholder='Category'
+        onChangeText={formik.handleChange('category')}
+        onBlur={formik.handleBlur('category')}
+        value={formik.values.category}
       />
+      {formik.touched.category && formik.errors.category && (
+        <Text style={styles.error}>{formik.errors.category}</Text>
+      )}
       <TextInput
-        placeholder="Masukan Tag"
         style={styles.textInput}
-        value={recipeTags}
-        onChangeText={text => setRecipeTags(text)}
+        placeholder='Tags'
+        onChangeText={formik.handleChange('tags')}
+        onBlur={formik.handleBlur('tags')}
+        value={formik.values.tags}
       />
+      {formik.touched.tags && formik.errors.tags && (
+        <Text style={styles.error}>{formik.errors.tags}</Text>
+      )}
       <TextInput
-        placeholder="Bahan-Bahan"
-        style={[styles.textInput, {height: 100}]}
-        value={recipeIngredients}
-        onChangeText={text => setRecipeIngredients(text)}
-        multiline
+        style={styles.textInput}
+        placeholder='Ingredients'
+        onChangeText={formik.handleChange('ingredients')}
+        onBlur={formik.handleBlur('ingredients')}
+        value={formik.values.ingredients}
       />
+      {formik.touched.ingredients && formik.errors.ingredients && (
+        <Text style={styles.error}>{formik.errors.ingredients}</Text>
+      )}
       <TextInput
-        placeholder="Cara Memasak"
-        style={[styles.textInput, {height: 200}]}
-        value={recipeDirections}
-        onChangeText={text => setRecipeDirections(text)}
-        multiline
+        style={styles.textInput}
+        placeholder='Directions'
+        onChangeText={formik.handleChange('steps')}
+        onBlur={formik.handleBlur('steps')}
+        value={formik.values.steps}
       />
-      <TouchableOpacity style={styles.addButton} onPress={handleAddRecipe}>
-        <Text style={styles.addButtonText}>Kirim</Text>
+      {formik.touched.steps && formik.errors.steps && (
+        <Text style={styles.error}>{formik.errors.steps}</Text>
+      )}
+      <TouchableOpacity style={styles.addButton} onPress={formik.handleSubmit}>
+        <Text style={styles.addButtonText}>Add Recipe</Text>
       </TouchableOpacity>
     </View>
   );
@@ -97,7 +160,7 @@ const styles = StyleSheet.create({
     width: 70,
     height: 70,
     marginRight: 10,
-  }, 
+  },
   textInput: {
     borderWidth: 1,
     borderColor: '#ddd',
@@ -114,6 +177,14 @@ const styles = StyleSheet.create({
   addButtonText: {
     color: '#fff',
     fontSize: 18,
+  },
+  error: {
+    color: 'red',
+    fontSize: 14,
+    alignSelf: 'flex-start',
+    marginTop: -10,
+    marginLeft: 10,
+    marginBottom: 10,
   },
 });
 

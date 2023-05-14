@@ -17,8 +17,8 @@ export default function App() {
   return (
     <AuthProvider>
       <NavigationContainer>
-        <Stack.Navigator 
-        // initialRouteName={'AccUser'}
+        <Stack.Navigator
+          initialRouteName={'UpdatePass'}
           screenOptions={{
             headerShown: false,
           }}
