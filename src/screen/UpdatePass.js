@@ -36,15 +36,15 @@ const UpdatePass = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F2CFCF',
+    backgroundColor: '#f0f8ff',
     borderRadius: 10,
-    padding: 20,
+    padding: 50,
     justifyContent: 'center',
     alignItems: 'center'
   },
   textInput: {
     borderWidth: 1,
-    borderColor: '#ddd',
+    borderColor: '#F50',
     padding: 10,
     borderRadius: 5,
     marginBottom: 20,

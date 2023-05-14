@@ -87,7 +87,7 @@ const HomeScreen = () => {
               style={styles.profileImage}
             />
           </View>
-          <Text style={styles.profileName}>Irsan</Text>
+          <Text style={styles.profileName}>Madazyan</Text>
         </View>
       </View>
 
@@ -129,6 +129,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 15,
+    backgroundColor: '#f0f8ff',
   },
   header: {
     flexDirection: 'row',

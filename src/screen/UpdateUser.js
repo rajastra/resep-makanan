@@ -57,9 +57,9 @@ const UpdateUser = () => {
 const styles = StyleSheet.create ({
   container: {
     flex: 1,
-    backgroundColor: '#F2CFCF',
+    backgroundColor: '#f0f8ff',
     borderRadius: 10,
-    padding: 70,
+    padding: 50,
   },
   centered: {
     flex: 1,
@@ -88,7 +88,7 @@ const styles = StyleSheet.create ({
   },
   textInput: {
     borderWidth: 1,
-    borderColor: '#000',
+    borderColor: '#F50',
     padding: 10,
     borderRadius: 5,
     marginBottom: 20,

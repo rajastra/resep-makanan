@@ -25,7 +25,7 @@ const AccUser = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F2CFCF',
+    backgroundColor: '#f0f8ff',
     padding: 70,
   },
   header: {
@@ -57,21 +57,22 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   profileButton: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#DF0606',
     padding: 10,
     borderRadius: 5,
     alignItems: 'center',
     marginBottom: 10,
   },
   logoutButton: {
-    backgroundColor: '#dc3545',
+    backgroundColor: '#DF0606',
     padding: 10,
     borderRadius: 5,
     alignItems: 'center',
   },
   buttonText: {
-    color: '#000',
+    color: 'white',
     fontSize: 18,
+    fontWeight: 'bold',
   },
 });
 
