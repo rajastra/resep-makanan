@@ -10,7 +10,7 @@ const AccUser = () => {
       </View>
       <View style={styles.userInfo}>
     <Text style={[styles.name, {textAlign: 'center'}]}>Madazyan</Text>
-    <Text style={[styles.email, {textAlign: 'center'}]}>madazyan@mail.com</Text>
+    <Text style={[styles.email, {textAlign: 'center'}]}>madazyan@itera.ac.id</Text>
     </View>
       <TouchableOpacity style={styles.profileButton}>
         <Text style={styles.buttonText}>Profile</Text>
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   premiumText: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#f1c40f',
+    color: '#d58512',
   },
   userInfo: {
     marginBottom: 20,
