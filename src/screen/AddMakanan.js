@@ -29,8 +29,9 @@ const AddMakanan = () => {
         <Image source={{uri: recipeImage}} style={styles.recipeImage} />
       )}
       <TouchableOpacity style={styles.imagePickerButton} onPress={handleImagePicker}>
-        <Text style={styles.imagePickerButtonText}>Upload Foto</Text>
-      </TouchableOpacity>
+    <Image source={require('../../img/Uploads.jpg')} style={styles.uploadIcon} />
+    <Text style={styles.imagePickerButtonText}>Upload Foto</Text>
+  </TouchableOpacity>
       <TextInput
         placeholder="Nama Resep Makanan"
         style={styles.textInput}
@@ -75,7 +76,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F2CFCF',
     borderRadius: 10,
-    padding: 20,
+    padding: 30,
   },
   recipeImage: {
     width: '100%',
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   imagePickerButton: {
-    backgroundColor: '#f50',
+    backgroundColor: '#fff',
     padding: 10,
     borderRadius: 5,
     alignItems: 'center',
@@ -92,6 +93,11 @@ const styles = StyleSheet.create({
   imagePickerButtonText: {
     fontSize: 18,
   },
+  uploadIcon: {
+    width: 70,
+    height: 70,
+    marginRight: 10,
+  }, 
   textInput: {
     borderWidth: 1,
     borderColor: '#ddd',

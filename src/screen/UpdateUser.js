@@ -28,8 +28,10 @@ const UpdateUser = () => {
   )}
   {!userImage && (
     <TouchableOpacity style={styles.imagePickerButton} onPress={handleImagePicker}>
-      <Text style={styles.imagePickerButtonText}>Upload Foto</Text>
-    </TouchableOpacity>
+    <Image source={require('../../img/Uploads.jpg')} style={styles.uploadIcon} />
+    <Text style={styles.imagePickerButtonText}>Upload Foto</Text>
+  </TouchableOpacity>
+  
   )}
   <View style={styles.centered}>
     <TextInput
@@ -69,8 +71,13 @@ const styles = StyleSheet.create ({
     height: 200,
     marginBottom: 20,
   },
+  uploadIcon: {
+    width: 50,
+    height: 50,
+    marginRight: 10,
+  },  
   imagePickerButton: {
-    backgroundColor: '#f50',
+    backgroundColor: '#fff',
     padding: 10,
     borderRadius: 5,
     alignItems: 'center',
@@ -81,7 +88,7 @@ const styles = StyleSheet.create ({
   },
   textInput: {
     borderWidth: 1,
-    borderColor: '#ddd',
+    borderColor: '#000',
     padding: 10,
     borderRadius: 5,
     marginBottom: 20,
