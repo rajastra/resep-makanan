@@ -25,10 +25,6 @@ const LoginScreen = () => {
   const { isLoading, error, sendRequest } = useHttp();
   const { updateToken } = useAuth();
   const navigation = useNavigation();
-  /*
-   email: 'rajatesting@gmail.com',
-   password: '1234raja',
-    */
 
   const formik = useFormik({
     initialValues: { email: '', password: '' },
