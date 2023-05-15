@@ -141,7 +141,7 @@ const AddMakanan = () => {
             style={styles.addButton}
             onPress={formik.handleSubmit}
           >
-            <Text style={styles.addButtonText}>Add Recipe</Text>
+            <Text style={styles.addButtonText}>Kirim</Text>
           </TouchableOpacity>
         )}
       </View>
