@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     marginVertical: 16,
   },
   title: {
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 8,
     color: '#fff',
@@ -116,11 +116,11 @@ const styles = StyleSheet.create({
   listBahan: {
     marginLeft: 16,
     marginBottom: 4,
-    color: '#000',
+    color: '#fff',
   },
   caraMembuat: {
     marginLeft: 16,
     marginBottom: 16,
-    color: '#000',
+    color: '#fff',
   },
 });

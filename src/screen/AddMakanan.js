@@ -87,7 +87,7 @@ const AddMakanan = () => {
         </TouchableOpacity>
         <TextInput
           style={styles.textInput}
-          placeholder='Recipe Name'
+          placeholder='Nama Resep'
           onChangeText={formik.handleChange('title')}
           onBlur={formik.handleBlur('title')}
           value={formik.values.title}
@@ -97,7 +97,7 @@ const AddMakanan = () => {
         )}
         <TextInput
           style={styles.textInput}
-          placeholder='Category'
+          placeholder='Kategori'
           onChangeText={formik.handleChange('category')}
           onBlur={formik.handleBlur('category')}
           value={formik.values.category}
@@ -117,7 +117,7 @@ const AddMakanan = () => {
         )}
         <TextInput
           style={styles.textInput}
-          placeholder='Ingredients'
+          placeholder='Bahan-Bahan'
           onChangeText={formik.handleChange('ingredients')}
           onBlur={formik.handleBlur('ingredients')}
           value={formik.values.ingredients}
@@ -127,7 +127,7 @@ const AddMakanan = () => {
         )}
         <TextInput
           style={styles.textInput}
-          placeholder='Directions'
+          placeholder='Cara Memasak'
           onChangeText={formik.handleChange('steps')}
           onBlur={formik.handleBlur('steps')}
           value={formik.values.steps}
@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     borderWidth: 1,
-    borderColor: '#ddd',
+    borderColor: '#000',
     padding: 10,
     borderRadius: 5,
     marginBottom: 20,
