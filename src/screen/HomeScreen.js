@@ -8,7 +8,7 @@ import {
   Image,
   ActivityIndicator,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { ScrollView } from 'react-native';
 import Resep from '../components/Resep';
 import bg from '../../img/bg.jpg';
@@ -49,6 +49,25 @@ const HomeScreen = () => {
   useEffect(() => {
     getRecipes();
   }, [getRecipes]);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      getRecipes();
+    }, [])
+  );
+
+  const handleDelete = (id) => {
+    sendRequest(
+      {
+        url: `/api/v1/recipes/${id}`,
+        method: 'DELETE',
+      },
+      (responseData) => {
+        console.log(responseData);
+        getRecipes();
+      }
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -107,7 +126,11 @@ const HomeScreen = () => {
           {!isLoading && (
             <ScrollView>
               {filteredRecipes?.map((recipe) => (
-                <Resep obj={recipe} key={recipe.id} />
+                <Resep
+                  obj={recipe}
+                  key={recipe.id}
+                  handleDelete={() => handleDelete(recipe.id)}
+                />
               ))}
             </ScrollView>
           )}
