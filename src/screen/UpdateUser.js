@@ -51,7 +51,7 @@ const UpdateUser = () => {
       )}
       <View style={styles.centered}>
         <TextInput
-          placeholder='Madazyan Ahza'
+          placeholder='Madazyan'
           style={styles.textInput}
           value={userName}
           onChangeText={(text) => setUserName(text)}
@@ -117,6 +117,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginBottom: 20,
     width: '100%',
+    color: '#000',
   },
   changePasswordButton: {
     backgroundColor: '#DF0606',
@@ -127,6 +128,7 @@ const styles = StyleSheet.create({
   changePasswordButtonText: {
     color: '#fff',
     fontSize: 18,
+    fontWeight: 'bold'
   },
 });
 
