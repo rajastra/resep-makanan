@@ -51,13 +51,13 @@ const UpdateUser = () => {
       )}
       <View style={styles.centered}>
         <TextInput
-          placeholder='Name'
+          placeholder='Madazyan Ahza'
           style={styles.textInput}
           value={userName}
           onChangeText={(text) => setUserName(text)}
         />
         <TextInput
-          placeholder='E-mail'
+          placeholder='madazyan@mail.com'
           style={styles.textInput}
           value={userEmail}
           onChangeText={(text) => setUserEmail(text)}

@@ -152,7 +152,7 @@ const AddMakanan = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F2CFCF',
+    backgroundColor: '#f0f8ff',
     borderRadius: 10,
     padding: 30,
     paddingTop: 80,

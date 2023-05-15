@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#dc3545',
     borderRadius: 5,
     paddingVertical: 10,
-    paddingHorizontal: 20,
+    paddingHorizontal: 5,
     alignItems: 'center',
     position: 'absolute',
     top: 10,
@@ -72,7 +72,10 @@ const styles = StyleSheet.create({
   },
   deleteButtonText: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: 10,
     fontWeight: 'bold',
   },
 });
+
+
+
